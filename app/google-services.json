@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "89585747966",
+    "firebase_url": "https://cinta-tap.firebaseio.com",
+    "project_id": "cinta-tap",
+    "storage_bucket": "cinta-tap.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89585747966:android:0036967376ff7b0c40e2af",
+        "android_client_info": {
+          "package_name": "com.example.cinta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "89585747966-p8uo567ubtivhii5cfjvn7t8e59ntk2i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgJ0K4PPYvjCl-Lw_3EX4gj0LEaCyNYRs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "89585747966-p8uo567ubtivhii5cfjvn7t8e59ntk2i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
