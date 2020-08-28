@@ -1,5 +1,6 @@
 package com.example.cinta
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -38,16 +39,19 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-    }
 
-    public override fun onStart() {
-        super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         signInAnonymously()
         val currentUser = auth.currentUser
         if (currentUser != null) {
             Log.d(TAG, currentUser.uid.toString())
         }
+        val sharedPref = getPreferences(Context.MODE_PRIVATE) ?: return
+        with (sharedPref.edit()) {
+            putString(getString(R.string.current_user), currentUser?.uid.toString())
+            commit()
+        }
+
     }
 
     private fun signInAnonymously() {
