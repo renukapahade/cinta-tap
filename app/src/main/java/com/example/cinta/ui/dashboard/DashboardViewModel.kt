@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class DashboardViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "You will see list of all users here"
+        value = "You will see the list of all users here"
     }
     val text: LiveData<String> = _text
 }

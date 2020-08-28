@@ -14,12 +14,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.cinta.R
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
-
+    val TAG = "Cinta-TAP"
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -30,6 +31,7 @@ class HomeFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         val textView: TextView = root.findViewById(R.id.text_home)
 
+        //Progress bar animation controls
         val progressBar: ProgressBar = root.findViewById(R.id.progressBar)
         val progressAnimator = ObjectAnimator.ofInt(progressBar, "progress", 0, 360)
         progressAnimator.duration = 3600
@@ -40,16 +42,20 @@ class HomeFragment : Fragment() {
             textView.text = it
         })
 
+        //Access the current user ID
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-        val highScore = sharedPref?.getString(getString(R.string.current_user), "NA")
-        Log.d("FRAGMENT",highScore.toString())
+        val userID = sharedPref?.getString(getString(R.string.current_user), null)
+        Log.d(TAG,userID.toString())
 
+        val db = FirebaseFirestore.getInstance()
         root.setOnClickListener {
             if(progressBar.visibility != View.GONE) {
                 val progress = progressAnimator.animatedFraction * 360
                 progressAnimator.end()
                 textView.text = "Angle recorded = " + progress.toString() + " degrees"
                 progressBar.visibility = View.GONE
+                val userData = hashMapOf("angle" to progress.toString())
+                userID?.let { db.collection("users").document(it) }?.set(userData)
             }
         }
 
